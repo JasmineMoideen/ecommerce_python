@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if category %}
+
+            <p><a href="{% url 'shop:allprodcat' %}">Our Product COLLECTIONS</a></p>
+
+    {% endif %}
+
+    {% if category %}
+        <img src="{{cat.image.url}}">
+        <h1>{{cat.name}}</h1>
+        <p>{{cat.description}}</p>
+
+    {% else %}
+      <h4>our product collections</h4>
+    {% endif %}
+
+
+    {% for product in products.object_list %}
+        <h3>{{product.name}}</h3>
+
+        <a href="{{product.get_url}}"><img src="{{product.img.url}}"></a>
+
+        <p>{{product.desc}}</p>
+    {% endfor %}
+<div class="mx-auto">
+  {% if products.paginator.num_pages > 1 %}
+    <div class="text-center">
+        {% for pg in products.paginator.page_range %}
+        <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

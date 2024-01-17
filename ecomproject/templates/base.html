@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>base</title>
+    <script src="https://kit.fontawesome.com/1b99dd44bf.js" crossorigin="anonymous"></script>
+</head>
+<body>
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+{% block content %}
+{% endblock %}
+{% include 'footer.html' %}
+</body>
+</html>

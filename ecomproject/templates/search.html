@@ -1,0 +1,10 @@
+<p>you have searched for<b>{{query}}</b></p>
+{% for product in products %}
+        <h3>{{product.name}}</h3>
+
+        <a href="{{product.get_url}}"><img src="{{product.img.url}}"></a>
+
+        <p>{{product.desc}}</p>
+{% empty %}
+     <p>no products found</p>
+{% endfor %}

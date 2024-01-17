@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if not cart_items %}
+    <h3>your hopping cart i empty</h3>
+    <p>please click <a href="{% url 'shop:allprodcat' %}">here</a></p>
+{% else %}
+{% for cart_item in cart_items %}
+<br>
+<a href="cart_item.product.get_absolute_url"><img src="{{cart_item.product.img.url}}"></a>
+<p>{{cart_item.product.name}}</p>
+sku:<p>{{cart_item.product.price}}</p>
+price:$<p>{{cart_item.product.price}}</p>
+qty:<p>{{cart_item.product.quantity}} * $ {{cart_item.product.price}}</p>
+subtotal: {{cart_item.sub_total}}
+{% if cart_item.quantity < cart_item.product.stock %}
+    <a href="{% url 'cart:add_cart' cart_item.product.id %}"><i class="fa-solid fa-square-plus"></i></a>
+    <a href="{% url 'cart:remove_cart' cart_item.product.id  %}"><i class="fa-solid fa-minus"></i></a><a href=""><i class="fa-solid fa-delete-left"></i></a>
+     <a href="{% url 'cart:full_remove' cart_item.product.id  %}"><i class="fa-solid fa-delete-left"></i></a>
+{% else %}
+     <a href="{% url 'cart:remove_cart' cart_item.product.id  %}"><i class="fa-solid fa-minus"></i></a>
+     <a href="{% url 'cart:full_remove' cart_item.product.id  %}"><i class="fa-solid fa-delete-left"></i></a>
+
+{% endif %}
+{% endfor %}
+{% endif %}
+<p>Total:{{total}}</p>
+{% endblock %}
